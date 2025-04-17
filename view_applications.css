@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary: #4f46e5;
+    --secondary: #64748b;
+    --light: #f8fafc;
+    --dark: #1e293b;
+    --success: #22c55e;
+    --warning: #facc15;
+    --danger: #ef4444;
+    
+}
+
+body {
+    display: flex;
+    background-color: var(--light);
+    min-height: 100vh;
+    
+}
+
+#sidebar {
+    width: 260px;
+    background: var(--dark);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh; /* Full height */
+    overflow-y: auto; /* Enable scrolling if content exceeds */
+    transition: width 0.3s ease;
+}
+
+#sidebar .brand {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+}
+
+#sidebar .brand i {
+    margin-right: 10px;
+}
+
+#sidebar a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+#sidebar a:hover, #sidebar a.active {
+    background: var(--primary);
+}
+
+#sidebar a i {
+    margin-right: 10px;
+}
+
+.dropdown-icon {
+    margin-left: 40px; /* Adds spacing between text and icon */
+    color: white; /* Makes the icon white */
+    transition: transform 0.3s; /* Smooth transition for rotation */
+}
+
+.recruitment-link.active .dropdown-icon {
+    transform: rotate(180deg); /* Rotates icon when dropdown is open */
+}
+
+ /* Dropdown styling */
+.dropdown-content {
+    display: none; /* Hidden by default */
+    background-color: #444;
+    position: absolute;
+    left: 20px;
+    z-index: 1000; /* Ensures it appears above other elements */
+    width: 200px;
+    padding: 10px 0;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #575757; /* Highlight on hover */
+}
+
+.dropdown-content.active {
+    display: block; /* Show dropdown when active */
+}
+
+#content {
+    margin-left: 0px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+#header {
+    background: white;
+    display: flex;
+    align-items: center; /* Align vertically */
+    justify-content: space-between; /* Push left and right sections apart */
+    padding: 15px 30px;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.user-controls {
+    display: flex;
+    justify-content: flex-end; /* Ensure alignment to the right */
+    align-items: center; /* Center icons vertically */
+    gap: 20px; /* Space between icons */
+    margin-left: auto; /* Push to the far right */
+}
+
+.user-controls .notifications {
+    position: relative;
+    font-size: 24px;
+}
+
+.user-controls .notifications .notification-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: var(--danger);
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+.user-controls .account {
+    position: relative;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.user-controls .account-menu {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    border: 3px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-controls .account-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--dark);
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.user-controls .account-menu a:hover {
+    background: var(--light);
+}
+
+
+.breadcrumb {
+    padding: 15px 30px;
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.breadcrumb a {
+    color: var(--primary);
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+.breadcrumb span {
+    margin-right: 5px;
+    color: var(--secondary);
+}
+
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Card Sections */
+.profile-section,
+.application-section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+}
+
+.profile-section h2,
+.application-section h2 {
+    color: var(--dark);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--light);
+}
+
+/* Profile Header */
+.profile-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.avatar-section {
+    width: 180px;
+}
+
+.avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid var(--light);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Details Styling */
+.personal-details,
+.application-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.detail-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 20px;
+    align-items: baseline;
+    padding: 8px 0;
+}
+
+.detail-row strong {
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.detail-row span,
+.detail-row a {
+    color: var(--secondary);
+    line-height: 1.5;
+}
+
+.detail-row a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.detail-row a:hover {
+    text-decoration: underline;
+}
+
+/* Action Buttons */
+.applications-actions {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.btn-back {
+    background-color: var(--primary);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-back:hover {
+    background-color: #3f37c9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .profile-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .avatar-section {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .avatar {
+        width: 150px;
+        height: 150px;
+    }
+
+    .detail-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+        text-align: left;
+    }
+
+    .detail-row strong {
+        color: var(--dark);
+        font-size: 0.9rem;
+    }
+
+    .detail-row span,
+    .detail-row a {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .profile-section,
+    .application-section {
+        padding: 20px 15px;
+    }
+}

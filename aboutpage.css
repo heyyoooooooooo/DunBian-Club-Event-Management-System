@@ -1,0 +1,389 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Header Styles */
+header {
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo Section */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.club-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Navigation Items */
+.nav-items {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+/* Navigation Links */
+.nav-items a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+/* Active Menu Item Styles */
+.nav-items a.active {
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
+    font-weight: bold; /* Optional: make the active link stand out more */
+}
+
+/* Ensure hover effect for non-active items */
+.nav-items a:not(.active):hover {
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
+}
+
+.nav-items a:hover {
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
+}
+
+/* User Controls */
+.user-controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.notifications, .account {
+    font-size: 1.2rem;
+    color: #333;
+    cursor: pointer;
+}
+
+.account-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 0.5rem 0;
+    min-width: 150px;
+}
+
+.account-menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.account-menu a:hover {
+    background: #f5f5f5;
+}
+
+/* Login Button */
+.login-btn {
+    padding: 12px 24px;
+    background-color: #205f8a;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-btn:hover {
+    background-color: rgba(76,68,182,0.808);
+    transform: translateY(-2px);
+}
+
+.page-wrapper {
+    flex: 1 0 auto;
+    width: 100%;
+}
+
+/* About Page Container */
+.about-container {
+    margin-top: 90px;
+    padding: 2rem 5%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: calc(100vh - 90px - 300px);
+}
+
+/* Intro Section */
+.intro-section {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.intro-section h1 {
+    font-size: 2.5rem;
+    color: #205f8a;
+    margin-bottom: 1rem;
+}
+
+.main-description {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Mission & Vision Section */
+.mission-vision-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.mission-box, .vision-box {
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.mission-box:hover, .vision-box:hover {
+    transform: translateY(-5px);
+}
+
+.mission-box h2, .vision-box h2 {
+    color: #205f8a;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+/* History Section */
+.history-section {
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timeline {
+    margin-top: 2rem;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.year {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #205f8a;
+    min-width: 100px;
+}
+
+/* Activities Section */
+.activities-section {
+    margin-bottom: 4rem;
+}
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.activity-card {
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+}
+
+.activity-card i {
+    font-size: 2.5rem;
+    color: #205f8a;
+    margin-bottom: 1rem;
+}
+
+/* Team Section */
+.team-section {
+    margin-bottom: 4rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.team-member {
+    text-align: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+/* Footer Styles */
+footer {
+    background: #333;
+    color: white;
+    padding: 3rem 0;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    position: relative;
+    left: 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 0 5%;
+}
+
+.footer-section {
+    padding: 1rem;
+}
+
+.footer-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .nav-items {
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+
+    .about-container {
+        padding: 1rem;
+        margin-top: 150px;
+    }
+    
+    .intro-section h1 {
+        font-size: 2rem;
+    }
+    
+    .mission-vision-section,
+    .activities-grid,
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+}
+
+/* Section Headers */
+.activities-section h2,
+.team-section h2,
+.history-section h2 {
+    color: #205f8a;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}

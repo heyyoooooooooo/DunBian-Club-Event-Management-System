@@ -1,0 +1,284 @@
+:root{
+    --black: #black;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: .2s linear;
+}
+
+html{
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    overflow-x: hidden;
+
+}
+
+header{
+    position:fixed;
+    top: 0; left: 0; right:0 ;
+    background: white;
+    padding: 2rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+}
+
+/*headerlogo*/
+header .logo{
+    font-size: 3rem;
+    color: #333;
+    font-weight: bolder;
+}
+
+header .navbar a{
+    font-size: 2rem;
+    padding: 0 1.5rem;
+    color: #666;
+}
+
+header .navbar a:hover{
+    color: var(--pink);
+}
+
+header .icons a{
+    font-size: 2.5rem;
+    color: #333;
+    margin-left: 1.5rem;
+}
+
+header .icons a:hover{
+    color: var(--pink);
+}
+
+header #toggler{
+    display: none;
+}
+
+header .fa-bars{
+    font-size: 3rem;
+    color: #333;
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+    cursor: pointer;
+    border: 1rem solid rgba(0, 0, 0, .3);
+    display: none;
+}
+
+
+/*media queries*/
+@media(max-width:991px){
+    html{
+        font-size: 55%;
+    }
+    header{
+        padding: 2rem;
+    };
+}
+    
+/*media queries*/
+@media(max-width:768px){
+    header .fa-bars{
+        display: block;
+    }
+
+    header .navbar{
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background:#eee;
+        border-top: .1rem solid rgba(0, 0, 0, .1);
+    }
+
+    header .navbar a{
+        margin: 1.5rem;
+        padding: 1.5rem;
+        background: white;
+        border: 1rem solid rgba(0, 0, 0, .1);
+        display: block;
+    }
+}
+
+/*media queries*/
+@media(max-width:450px){
+    html{
+        font-size: 50%;
+    }
+    header .fa-bars{
+        display: block;
+    }
+
+    header .navbar{
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background:#eee;
+        border-top: .1rem solid rgba(0, 0, 0, .1);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+
+    header #toggler:checked ~ .navbar{
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0% 100%);
+
+    }
+    header .navbar a{
+        margin: 1.5rem;
+        padding: 1.5rem;
+        background: white;
+        border: 1rem solid rgba(0, 0, 0, .1);
+        display: block;
+}
+}
+
+/*hero section
+* Home Page 
+#hero {
+    background-image: url("img/file.jpg");
+    height: 70vh;
+    width: 100%;
+    background-position: top 25% right 0%;
+    background-size: cover;
+    padding: 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+}
+
+#hero h4{
+    padding-bottom: 50px;
+}
+
+#hero h1{
+    color: #088178;
+}
+
+#hero p{
+    color: rgb(0, 0, 0);
+}
+
+/* Style the button 
+#hero button {
+    position: absolute;
+    bottom: 80px;  /* Positioning from the bottom 
+    left: 200px;    /* Positioning from the left 
+    padding: 10px 20px;
+    background-color: #088178;  /* Greenish background color 
+    color: #ffffff;  /* White text 
+    border: none;
+    border-radius: 5px;  /* Rounded corners 
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for button 
+#hero button:hover {
+    background-color: #066a5f;
+    transform: scale(1.05);  /* Slightly enlarges on hover 
+}
+
+
+/*search bar*/
+/* Search Bar Styling */
+#search-bar {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background-color: #5A264A;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+#search-bar .search-input, 
+#search-bar .dropdown, 
+#search-bar .date-picker, 
+#search-bar .search-button {
+    padding: 0.8rem;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+}
+
+#search-bar .search-input {
+    flex: 2;
+}
+
+#search-bar .dropdown, 
+#search-bar .date-picker {
+    flex: 1;
+    background-color: #EEE;
+    color: #333;
+}
+
+#search-bar .search-button {
+    flex: 1;
+    background-color: #A73470;
+    color: #FFF;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#search-bar .search-button:hover {
+    background-color: #87245C;
+}
+
+/* Footer Section */
+.footer {
+    background-color: #f1f1f1; /* Adjust background color as needed */
+    padding: 2rem 5%; /* Adds space on the left and right sides */
+}
+
+.footer .box-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center; /* Centers items within the container */
+}
+
+.footer .box-container .box {
+    flex: 1 1 25rem; /* Ensures boxes have a minimum width and grow as needed */
+    max-width: 300px; /* Limits the maximum width of each box */
+    padding: 1rem; /* Adds padding inside each box */
+}
+
+.footer .box-container .box h3 {
+    color: black;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer .box-container .box a {
+    display: block;
+    color: #666;
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+.footer .box-container .box a:hover {
+    color: #A73470; /* Change hover color to match theme */
+    text-decoration: underline;
+}
+
+.footer .credit {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 2rem;
+    color: #333;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}

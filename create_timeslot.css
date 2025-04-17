@@ -1,0 +1,454 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary: #4f46e5;
+    --secondary: #64748b;
+    --light: #f8fafc;
+    --dark: #1e293b;
+    --success: #22c55e;
+    --warning: #facc15;
+    --danger: #ef4444;
+    
+}
+
+body {
+    display: flex;
+    background-color: var(--light);
+    min-height: 100vh;
+    
+}
+
+#sidebar {
+    width: 260px;
+    background: var(--dark);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh; /* Full height */
+    overflow-y: auto; /* Enable scrolling if content exceeds */
+    transition: width 0.3s ease;
+}
+
+#sidebar .brand {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+}
+
+#sidebar .brand i {
+    margin-right: 10px;
+}
+
+#sidebar a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+#sidebar a:hover, #sidebar a.active {
+    background: var(--primary);
+}
+
+#sidebar a i {
+    margin-right: 10px;
+}
+
+.dropdown-icon {
+    margin-left: 40px; /* Adds spacing between text and icon */
+    color: white; /* Makes the icon white */
+    transition: transform 0.3s; /* Smooth transition for rotation */
+}
+
+.recruitment-link.active .dropdown-icon {
+    transform: rotate(180deg); /* Rotates icon when dropdown is open */
+}
+
+ /* Dropdown styling */
+.dropdown-content {
+    display: none; /* Hidden by default */
+    background-color: #444;
+    position: absolute;
+    left: 20px;
+    z-index: 1000; /* Ensures it appears above other elements */
+    width: 200px;
+    padding: 10px 0;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #575757; /* Highlight on hover */
+}
+
+.dropdown-content.active {
+    display: block; /* Show dropdown when active */
+}
+
+#content {
+    margin-left: 0px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+#header {
+    background: white;
+    display: flex;
+    align-items: center; /* Align vertically */
+    justify-content: space-between; /* Push left and right sections apart */
+    padding: 15px 30px;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.user-controls {
+    display: flex;
+    justify-content: flex-end; /* Ensure alignment to the right */
+    align-items: center; /* Center icons vertically */
+    gap: 20px; /* Space between icons */
+    margin-left: auto; /* Push to the far right */
+}
+
+.user-controls .notifications {
+    position: relative;
+    font-size: 24px;
+}
+
+.user-controls .notifications .notification-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: var(--danger);
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+.user-controls .account {
+    position: relative;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.user-controls .account-menu {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    border: 3px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-controls .account-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--dark);
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.user-controls .account-menu a:hover {
+    background: var(--light);
+}
+
+
+/*.search-bar {
+    flex-grow: 1;
+    max-width: 350px;
+    display: flex;
+    align-items: center;
+    background: var(--light);
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+.search-bar input {
+    width: 100%;
+    border: none;
+    background: none;
+    outline: none;
+}*/
+
+
+
+.breadcrumb {
+    padding: 15px 30px;
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.breadcrumb a {
+    color: var(--primary);
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+.breadcrumb span {
+    margin-right: 5px;
+    color: var(--secondary);
+}
+
+/*Create Recruitment Form*/
+.new-interview h2 {
+    padding: 20px 30px;
+}
+
+.new-interview form {
+    background: white;
+    padding: 20px 20px 10px 20px; /* Decreased padding to reduce height */
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 1000px; /* Increased the width */
+    width: 100%;
+}
+
+.new-interview form label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--secondary);
+}
+
+.new-timeslot .form-group {
+    margin-bottom: 25px; /* Increase the space between form groups */
+}
+
+.new-interview form input, form textarea, form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px; /* Reduced the margin to make it more compact */
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: var(--light);
+    font-size: 16px;
+    color: var(--dark);
+}
+
+.new-interview form textarea {
+    resize: vertical;
+}
+
+.new-interview form button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.new-interview form button:hover {
+    background-color: #3b3fb7;
+}
+
+.new-interview form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Input Focus Styling */
+.new-interview input:focus, textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* File Input Styling */
+
+/* Input container for icons inside inputs */
+.new-interview .input-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Styling the input fields */
+.new-interview form input[type="text"],
+.new-interview form input[type="date"],
+.new-interview form input[type="time"],
+.new-interview form textarea {
+    box-sizing: border-box; /* Includes padding and border in width calculation */
+    padding-left: 40px;  /* Adjust padding to make space for icon */
+    padding-top: 12px;    /* Use padding-top to control height space */
+    padding-bottom: 12px; /* Use padding-bottom to control height space */
+    font-size: 16px;
+    color: var(--dark);
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: var(--light);
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Style the icon inside the input */
+.new-interview .input-icon {
+    position: absolute;
+    left: 12px; /* Position the icon a little further to the left */
+    top: 38%;
+    transform: translateY(-50%);
+    color: #888; /* Icon color */
+    font-size: 18px; /* Icon size */
+}
+
+/* For the date and time inputs, only icons should be used */
+.new-interview input[type="text"]:focus, 
+.new-interview input[type="date"]:focus, 
+.new-interview input[type="time"]:focus, 
+textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.new-timeslot form input[type="text"],
+.new-timeslot form input[type="number"],
+.new-timeslot form input[type="date"],
+.new-timeslot form input[type="time"] {
+    padding-left: 32px; /* Adjust padding to make space for the icon on the left */
+}
+/* General message box styles */
+/* General message box styles */
+ .message-container {
+    width: 100%; /* Make the message box the same width as the form */
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    border: 1px solid transparent;
+}
+
+/* Success message styles */
+.message-container.success-message {
+    background-color: #d4edda; /* Light green background for success */
+    color: #155724; /* Dark green text color */
+    border-color: #c3e6cb; /* Border color matching the success background */
+}
+
+ .message-container.success-message i {
+    color: #28a745; /* Green color for the success icon */
+    margin-right: 10px; /* Space between the icon and text */
+}
+
+/* Error message styles */
+ .message-container.error-messages {
+    background-color: #f8d7da; /* Light red background for error */
+    color: #721c24; /* Dark red text color */
+    border-color: #f5c6cb; /* Border color matching the error background */
+}
+
+ .message-container.error-messages i {
+    color: #dc3545; /* Red color for the error icon */
+    margin-right: 10px; /* Space between the icon and text */
+}
+
+/* Style for error and success message paragraphs */
+.message-container p {
+    margin: 0; /* Remove default margin */
+    padding: 0;
+}
+
+
+
+
+/*button*/
+button {
+    padding: 8px 15px;
+    border: none;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0px 5px;
+    font-size: 0.9rem; /* Slightly smaller for consistency */
+}
+
+button.btn-reject {
+    background-color: #f44336; /* Red */
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #777; /* Subtle disabled text color */
+}
+
+.btn-view {
+    background-color:  #007bff; /* Green for View */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn-view:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-edit {
+    background-color: #efb300; /* Orange for Edit */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn-edit:hover {
+    background-color:#f3bc18;
+  }
+
+  .btn-delete {
+    background-color: #f44336; /* Red for Delete */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn-delete:hover {
+    background-color: #e53935;
+  }

@@ -1,0 +1,392 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Header Styles */
+header {
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    height: 80px; /* Ensure consistent header height */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* Logo Section */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.club-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Navigation Items */
+.nav-items {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-grow: 1;
+    justify-content: center; /* Center the navigation links */
+}
+
+/* Navigation Links */
+.nav-items a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+/* Active Menu Item Styles */
+.nav-items a.active {
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
+    font-weight: bold; /* Optional: make the active link stand out more */
+}
+
+/* Ensure hover effect for non-active items */
+.nav-items a:not(.active):hover {
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
+}
+
+
+/* Hover Effects */
+.nav-items a:hover {
+    color: #3498db;
+    border-bottom: 2px solid #3498db; /* Add an underline effect */
+}
+
+/* User Controls */
+.user-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    margin-left: auto;
+}
+
+/* Notifications */
+.user-controls .notifications {
+    position: relative;
+    font-size: 24px;
+}
+
+/* Notification Badge */
+.user-controls .notifications .notification-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: #e74c3c; /* Red color for notification badge */
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+/* Account Icon */
+.user-controls .account {
+    position: relative;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Account Dropdown Menu */
+.user-controls .account-menu {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    border: 3px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Account Menu Links */
+.user-controls .account-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+/* Hover Effect for Account Menu */
+.user-controls .account-menu a:hover {
+    background: #f7f7f7;
+}
+
+/* Show the account menu */
+.user-controls .account.show-menu .account-menu {
+    display: block;
+}
+
+/* Login Now Button Styles */
+.login-btn {
+    padding: 12px 24px;  /* Adjust button size */
+    font-size: 16px;      /* Adjust font size */
+    background-color: #205f8a;  /* Blue background color */
+    color: white;         /* White text */
+    border: none;         /* Remove border */
+    border-radius: 30px;  /* Rounded corners */
+    cursor: pointer;     /* Cursor pointer on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition effects */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for 3D effect */
+    font-weight: 600; /* Bold text */
+    text-decoration: none;
+}
+
+/* Hover Effects */
+.login-btn:hover {
+    background-color: rgba(76,68,182,0.808); /* Darker blue on hover */
+    transform: translateY(-3px); /* Slight lift effect */
+}
+
+/* Active Effect (when button is clicked) */
+.login-btn:active {
+    background-color: #1c6d99; /* Even darker blue on click */
+    transform: translateY(1px); /* Push the button down on click */
+}
+
+/* Focus Effect (when button is focused via keyboard) */
+.login-btn:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.3); /* Add outline with blue focus effect */
+}
+/* Ensure space between header and container */
+.container {
+    max-width: 800px;
+    margin: 100px auto 2rem auto; /* Add margin-top to account for fixed header height */
+    padding: 0 1rem;
+}
+
+
+.application-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 2px solid #333; /* Added dark border */
+}
+
+.form-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+select.form-control {
+    background-image: url("data:image/svg+xml,%3Csvg fill='%23333' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.5rem;
+    padding-right: 2rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid #333; /* Dark border for select */
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+    padding: 0.75rem; /* Added padding for consistency */
+    border-radius: 4px; /* Match the button */
+    border: 1px solid #ddd; /* Match the button */
+    font-size: 1rem; /* Match the button */
+    transition: border-color 0.3s;
+}
+
+textarea.form-control:focus {
+    border-color: #007bff; /* Match the button's focus effect */
+}
+
+.radio-group {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.submit-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background: #0056b3;
+}
+
+/* Button focus style to make it consistent with other form elements */
+.submit-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+ /* Style for success and error messages */
+ .message-container {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error-messages {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.success-message i,
+.error-messages i {
+    margin-right: 10px;
+}
+
+.success-message i {
+    color: #28a745;
+}
+
+.error-messages i {
+    color: #dc3545;
+}
+
+/* Footer Styles */
+footer {
+    background: #333;
+    color: white;
+    padding: 3rem 5%;
+    width: 100%; /* Ensure footer spans the full width */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Footer Container (matching header structure) */
+.footer-content {
+    max-width: 1200px; /* Same max-width as header */
+    margin: 0 auto; /* Center align the content */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* Footer Section */
+.footer-section {
+    padding: 1rem;
+}
+
+.footer-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .application-form {
+        padding: 1rem;
+    }
+    .footer-content {
+        grid-template-columns: 1fr; /* Stack sections on smaller screens */
+    }
+}

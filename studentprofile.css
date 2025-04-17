@@ -1,0 +1,552 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --accent-color: #205f8a;
+    --text-dark: #333;
+    --text-medium: #555;
+    --text-light: #777;
+    --bg-light: #f5f7fa;
+    --bg-white: #ffffff;
+    --shadow-sm: 0 3px 6px rgba(0,0,0,0.08);
+    --shadow-md: 0 5px 15px rgba(0,0,0,0.1);
+    --shadow-lg: 0 8px 20px rgba(0,0,0,0.15);
+    --border-radius-sm: 8px;
+    --border-radius-md: 15px;
+    --border-radius-lg: 30px;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo Section */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.club-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #205f8a;
+}
+
+/* Navigation Items */
+.nav-items {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.nav-items a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-items a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background: #3498db;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.nav-items a:hover:after,
+.nav-items a.active:after {
+    width: 100%;
+}
+
+.nav-items a.active {
+    color: #3498db;
+    font-weight: 600;
+}
+
+.nav-items a:hover {
+    color: #3498db;
+}
+
+/* User Controls */
+.user-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.notifications {
+    position: relative;
+    cursor: pointer;
+}
+
+.notifications i {
+    font-size: 20px;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.notifications i:hover {
+    color: #3498db;
+}
+
+.account {
+    position: relative;
+    cursor: pointer;
+}
+
+.account i {
+    font-size: 20px;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.account i:hover {
+    color: #3498db;
+}
+
+.account-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    width: 180px;
+    z-index: 100;
+}
+
+.account-menu a {
+    display: block;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.account-menu a:hover {
+    background: #f0f7ff;
+    color: #3498db;
+}
+
+.account-menu a:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+.account-menu a:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+/* Login Button */
+.login-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #205f8a;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-btn:hover {
+    background-color: #3498db;
+    transform: translateY(-3px);
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 20px 40px;
+}
+
+/* Profile Layout - New Two-Card Design */
+.profile-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Avatar Card */
+.avatar-card {
+    background: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    padding: 30px;
+    height: fit-content;
+    transition: all 0.3s ease;
+}
+
+.avatar-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.avatar-wrapper {
+    width: 180px;
+    height: 180px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #f0f7ff;
+    box-shadow: var(--shadow-sm);
+}
+
+.student-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.student-matric {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 25px;
+}
+
+.avatar-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-sm);
+    width: 100%;
+    justify-content: center;
+}
+
+.avatar-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Info Card */
+.info-card {
+    background: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+    padding: 25px 30px;
+    border-bottom: 1px solid #eaedf0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.edit-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+.edit-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    padding: 30px;
+}
+
+.info-item {
+    margin-bottom: 5px;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--text-medium);
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.info-value {
+    font-size: 1rem;
+    color: var(--text-dark);
+    background-color: #f8f9fa;
+    padding: 12px 15px;
+    border-radius: var(--border-radius-sm);
+    display: block;
+    border-left: 3px solid var(--primary-color);
+}
+
+/* History Cards */
+.history-cards {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.history-card {
+    background: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.history-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.card-content {
+    padding: 25px 30px;
+}
+
+/* History Tables */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    text-align: left;
+    padding: 15px;
+    border-bottom: 2px solid #eaedf0;
+    color: var(--text-medium);
+}
+
+.history-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eaedf0;
+    vertical-align: top;
+}
+
+.history-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Event specific styles */
+.event-title, .recruitment-title {
+    font-weight: 500;
+    color: var(--text-dark);
+    font-size: 1rem;
+}
+
+.event-date, .event-time, .event-location, .recruitment-date, .timeslot {
+    color: var(--text-medium);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+/* Department choices */
+.department-choice {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+}
+
+.department-choice.primary {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.department-choice.secondary {
+    background-color: #f0f2f5;
+    color: #555;
+}
+
+/* Status indicators */
+.event-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.status-completed {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-upcoming {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.status-rejected {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* Empty state styling */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.empty-state img {
+    width: 120px;
+    height: 120px;
+    opacity: 0.7;
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    color: var(--text-medium);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.empty-state p {
+    color: var(--text-light);
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.action-btn {
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-lg);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.action-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .avatar-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-items {
+        display: none; /* For mobile menu implementation */
+    }
+    
+    .history-table {
+        display: block;
+        overflow-x: auto;
+    }
+}

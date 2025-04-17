@@ -1,0 +1,611 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary: #4f46e5;
+    --secondary: #64748b;
+    --light: #f8fafc;
+    --dark: #1e293b;
+    --success: #22c55e;
+    --warning: #facc15;
+    --danger: #ef4444;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --accent-dark: #4338ca;
+}
+
+body {
+    display: flex;
+    background-color: var(--light);
+    min-height: 100vh;
+}
+
+#sidebar {
+    width: 260px;
+    background: var(--dark);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh; /* Full height */
+    overflow-y: auto; /* Enable scrolling if content exceeds */
+    transition: width 0.3s ease;
+}
+
+#sidebar .brand {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+}
+
+#sidebar .brand i {
+    margin-right: 10px;
+}
+
+#sidebar a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+#sidebar a:hover, #sidebar a.active {
+    background: var(--primary);
+}
+
+#sidebar a i {
+    margin-right: 10px;
+}
+
+.dropdown-icon {
+    margin-left: 40px; /* Adds spacing between text and icon */
+    color: white; /* Makes the icon white */
+    transition: transform 0.3s; /* Smooth transition for rotation */
+}
+
+.recruitment-link.active .dropdown-icon {
+    transform: rotate(180deg); /* Rotates icon when dropdown is open */
+}
+
+/* Dropdown styling */
+.dropdown-content {
+    display: none; /* Hidden by default */
+    background-color: #444;
+    position: absolute;
+    left: 20px;
+    z-index: 1000; /* Ensures it appears above other elements */
+    width: 200px;
+    padding: 10px 0;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #575757; /* Highlight on hover */
+}
+
+.dropdown-content.active {
+    display: block; /* Show dropdown when active */
+}
+
+#content {
+    margin-left: 0px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+#header {
+    background: white;
+    display: flex;
+    align-items: center; /* Align vertically */
+    justify-content: space-between; /* Push left and right sections apart */
+    padding: 15px 30px;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.user-controls {
+    display: flex;
+    justify-content: flex-end; /* Ensure alignment to the right */
+    align-items: center; /* Center icons vertically */
+    gap: 20px; /* Space between icons */
+    margin-left: auto; /* Push to the far right */
+}
+
+.user-controls .notifications {
+    position: relative;
+    font-size: 24px;
+}
+
+.user-controls .notifications .notification-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: var(--danger);
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+.user-controls .account {
+    position: relative;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.user-controls .account-menu {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    border: 3px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-controls .account-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--dark);
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.user-controls .account-menu a:hover {
+    background: var(--light);
+}
+
+.breadcrumb {
+    padding: 15px 30px;
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 25px; /* Added space between breadcrumb and calendar */
+}
+
+.breadcrumb a {
+    color: var(--primary);
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+.breadcrumb span {
+    margin-right: 5px;
+    color: var(--secondary);
+}
+
+/* Message styling - Full width */
+.message {
+    padding: 15px 30px;
+    margin-bottom: 20px;
+    border-radius: 0; /* Remove border radius for full width */
+    display: flex;
+    align-items: center;
+    width: 100%; /* Full width */
+    max-width: 100%; /* Remove max-width limitation */
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.message i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.message.success {
+    background-color: #e8f5e9;
+    border-left: 4px solid #4caf50;
+    color: #2e7d32;
+}
+
+.message.error {
+    background-color: #ffebee;
+    border-left: 4px solid #f44336;
+    color: #c62828;
+}
+
+/* Calendar styling */
+.calendar-container {
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    width: 95%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.calendar-container h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--accent-dark);
+    font-size: 26px;
+    text-align: center;
+    font-weight: 600;
+}
+
+#calendar {
+    max-width: 100%;
+    margin: 0 auto;
+    font-size: 0.9em;
+}
+
+/* Calendar header styling - Updated for elegance */
+.fc .fc-toolbar-title {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: var(--accent-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fc .fc-button-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 2px 5px rgba(99, 102, 241, 0.3);
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.fc .fc-button-primary:hover {
+    background-color: var(--accent-dark);
+    border-color: var(--accent-dark);
+    transform: translateY(-1px);
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active, 
+.fc .fc-button-primary:not(:disabled):active {
+    background-color: var(--accent-dark);
+    border-color: var(--accent-dark);
+    box-shadow: 0 2px 3px rgba(67, 56, 202, 0.5);
+}
+
+/* Calendar date styling */
+.fc .fc-daygrid-day {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+.fc .fc-daygrid-day-frame {
+    padding: 2px;
+}
+
+.fc .fc-daygrid-day:hover {
+    background-color: #f0f7ff;
+    transform: scale(1.03);
+}
+
+/* Booked dates styling */
+.booked-event {
+    background-color: var(--accent) !important;
+    border-color: var(--accent-dark) !important;
+    color: white !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Selected date styling */
+.selected-date {
+    background-color: var(--success) !important;
+    box-shadow: 0 0 0 2px var(--success) !important;
+}
+
+/* Calendar legend */
+.calendar-legend {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.legend-item span {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border-radius: 4px;
+}
+
+.legend-item span.available {
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+.legend-item span.booked {
+    background-color: var(--accent);
+    border: 1px solid var(--accent-dark);
+}
+
+.legend-item span.selected {
+    background-color: var(--success);
+    border: 1px solid var(--success);
+}
+
+/* Modal styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 25px;
+    border: 1px solid #ddd;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.4s;
+    position: relative;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close, .close-view {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Form styling */
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    border-color: #4285f4;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px dashed #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Time picker styling */
+.time-picker-container,
+.date-picker-container {
+    position: relative;
+}
+
+.time-picker-container input,
+.date-picker-container input {
+    padding-right: 40px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.input-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+/* Action buttons */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.form-actions button {
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cancel-button {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+.cancel-button:hover {
+    background-color: #e0e0e0;
+}
+
+.submit-button {
+    background-color:  #4CAF50;
+    border: none;
+    color: white;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .calendar-container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .form-actions button {
+        width: 100%;
+    }
+}
+
+/* Timepicker styling */
+.ui-timepicker-container {
+    z-index: 1100 !important;
+}
+
+.ui-timepicker-list {
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ui-timepicker-list li {
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.ui-timepicker-list li:hover {
+    background-color: #f0f7ff;
+}
+
+/* Datepicker styling */
+.ui-datepicker {
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ui-datepicker-header {
+    background-color: #4285f4;
+    color: white;
+    border-radius: 6px 6px 0 0;
+}
+
+.ui-datepicker-calendar th {
+    padding: 5px;
+    font-weight: 500;
+}
+
+.ui-datepicker-calendar td {
+    padding: 3px;
+}
+
+.ui-datepicker-calendar td a {
+    border-radius: 4px;
+    text-align: center;
+}
+
+.ui-datepicker-calendar td a:hover {
+    background-color: #f0f7ff;
+}
+
+.ui-datepicker-calendar .ui-state-active {
+    background-color: #4285f4;
+    color: white;
+}

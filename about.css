@@ -1,0 +1,331 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: .2s linear;
+}
+
+html{
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    overflow-x: hidden;
+
+}
+
+header{
+    position:fixed;
+    top: 0; left: 0; right:0 ;
+    background: white;
+    padding: 2rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+}
+
+/*headerlogo*/
+header .logo{
+    font-size: 3rem;
+    color: #333;
+    font-weight: bolder;
+}
+
+header .navbar a{
+    font-size: 2rem;
+    padding: 0 1.5rem;
+    color: #666;
+}
+
+header .navbar a:hover{
+    color: var(--pink);
+}
+
+header .icons a{
+    font-size: 2.5rem;
+    color: #333;
+    margin-left: 1.5rem;
+}
+
+header .icons a:hover{
+    color: var(--pink);
+}
+
+header #toggler{
+    display: none;
+}
+
+header .fa-bars{
+    font-size: 3rem;
+    color: #333;
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+    cursor: pointer;
+    border: 1rem solid rgba(0, 0, 0, .3);
+    display: none;
+}
+
+
+
+/* Banner Section */
+.about-banner {
+    background-color: #f5f5f5;
+    padding: 20rem 0;
+    text-align: center;
+    margin-top: 6rem; /* Add margin-top to offset the header */
+}
+
+.about-banner .banner-text h1 {
+    font-size: 3rem;
+    color: #333;
+}
+
+.about-banner .banner-text p {
+    font-size: 1.5rem;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .about-banner {
+        margin-top: 5rem; /* Adjust for smaller screens if necessary */
+    }
+}
+
+/* Container Section */
+.about-container {
+    padding: 15rem 5%;
+    background-color: #fff;
+}
+
+.about-container .container-text h2 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.about-container .container-text p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 1rem;
+}
+
+/* General Styling */
+.about-section {
+    position: relative;
+    overflow: hidden; /* Ensures content doesn't overflow when split */
+    padding: 6rem 5%; /* Increased padding for more space */
+    height: 500px; /* Increased height for the section */
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 100%; /* Ensure content fills the section height */
+}
+
+.about-section .image-left,
+.about-section .image-right {
+    width: 35%; /* Image takes up 35% of the section width */
+    height: 100%; /* Ensures the image fills the section height */
+}
+
+.about-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    display: block;
+}
+
+/* Text Styling */
+.about-section .text-right, 
+.about-section .text-left {
+    width: 65%; /* Text takes up the remaining 65% of the section */
+    padding: 3rem; /* Increased padding for better spacing */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.about-section h3 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.about-section p {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Diagonal Split Effect */
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f1f1f1;
+    transform: skewY(-5deg); /* Create diagonal angle */
+    transform-origin: top left;
+    z-index: -1;
+}
+
+/* Reverse Section */
+.about-section.reverse::before {
+    transform: skewY(5deg); /* Reverse diagonal for the second section */
+}
+
+@media (max-width: 768px) {
+    .about-section .image-left,
+    .about-section .image-right,
+    .about-section .text-left,
+    .about-section .text-right {
+        width: 100%; /* Stack images and text on smaller screens */
+    }
+
+    .about-section .text-left,
+    .about-section .text-right {
+        padding: 1rem;
+    }
+}
+
+
+/* Leadership Board Section */
+.leadership-board {
+    padding: 3rem 5%;
+    background-color: #fff;
+    border-top: 2px solid #ccc;
+}
+
+.leadership-board .container-text h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.leadership-board .container-text p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.leadership-hierarchy {
+    font-size: 1.5rem;
+}
+
+.leadership-hierarchy ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.leadership-hierarchy li {
+    margin-bottom: 1rem;
+}
+
+.leadership-hierarchy .leader {
+    font-weight: bold;
+    color: #333;
+}
+
+.leadership-hierarchy li ul {
+    padding-left: 20px;
+}
+
+.leadership-hierarchy li ul li {
+    font-weight: normal;
+    color: #555;
+}
+
+.leadership-hierarchy .leader {
+    color: #A73470; /* Accent color for leadership roles */
+}
+
+@media (max-width: 768px) {
+    .leadership-board .container-text h2 {
+        font-size: 2rem;
+    }
+
+    .leadership-hierarchy li {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .leadership-board .container-text h2 {
+        font-size: 2rem;
+    }
+
+    .leadership-board .leadership-list li {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-section {
+        flex-direction: column;
+    }
+
+    .about-section .image-left img,
+    .about-section .image-right img {
+        max-width: 100%;
+    }
+}
+
+/* Footer Section */
+.footer {
+    background-color: #f1f1f1; /* Adjust background color as needed */
+    padding: 2rem 5%; /* Adds space on the left and right sides */
+}
+
+.footer .box-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center; /* Centers items within the container */
+}
+
+.footer .box-container .box {
+    flex: 1 1 25rem; /* Ensures boxes have a minimum width and grow as needed */
+    max-width: 300px; /* Limits the maximum width of each box */
+    padding: 1rem; /* Adds padding inside each box */
+}
+
+.footer .box-container .box h3 {
+    color: black;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer .box-container .box a {
+    display: block;
+    color: #666;
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+.footer .box-container .box a:hover {
+    color: #A73470; /* Change hover color to match theme */
+    text-decoration: underline;
+}
+
+.footer .credit {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 2rem;
+    color: #333;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
