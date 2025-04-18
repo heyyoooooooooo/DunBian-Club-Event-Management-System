@@ -116,6 +116,7 @@ body {
     flex-direction: column;
     height: 100vh;
     overflow-y: auto;
+    padding: 0 15px; /* Add horizontal padding */
 }
 
 #header {
@@ -241,7 +242,7 @@ body {
 /* Tab Content Styles */
 .tab-content {
     display: none;
-    padding: 20px 0;
+    padding: 15px 0;
 }
 
 .tab-content.active {
@@ -249,13 +250,12 @@ body {
 }
 
 /* General table styling */
-/* Improved Application List Table */
 .applications-list-table-container {
     background: white;
     border-radius: 10px;
     padding: 0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    margin: 20px 30px;
+    margin: 20px 15px;
     overflow: hidden;
 }
 
@@ -265,34 +265,40 @@ body {
     padding: 15px 20px;
 }
 
-.interview-table-header h2 {
-    font-size: 18px;
+.interview-table-header h2,
+.created-recruitments-header h2 {
+    font-size: 1.8rem; /* Increase title font size to 1.8rem */
     color: #1e293b;
     padding: 0;
     margin: 0;
     font-weight: 600;
 }
 
-.applications-list-table-container table {
+.applications-list-table-container table,
+.created-recruitments-table-container table {
+    table-layout: fixed; /* For more consistent column widths */
+    border-spacing: 0;
     width: 100%;
-    border-collapse: collapse;
 }
 
-.applications-list-table-container table th {
+.applications-list-table-container table th,
+.created-recruitments-table-container table th {
     background-color: #f8fafc;
     color: #64748b;
     font-weight: 600;
     padding: 15px 20px;
     text-align: left;
     border-bottom: 1px solid #e2e8f0;
-    font-size: 14px;
+    font-size: 0.9rem; /* Adjust header font size */
 }
 
-.applications-list-table-container table td {
+.applications-list-table-container table td,
+.created-recruitments-table-container table td {
     padding: 15px 20px;
     border-bottom: 1px solid #f1f5f9;
     color: #334155;
-    font-size: 14px;
+    vertical-align: middle;
+    font-size: 0.9rem; /* Adjust content font size to 0.9rem */
 }
 
 .applications-list-table-container table tr:hover {
@@ -330,7 +336,7 @@ body {
     border-radius: 10px;
     padding: 0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    margin: 20px 30px;
+    margin: 20px 15px;
     overflow: hidden;
 }
 
@@ -344,13 +350,7 @@ body {
     align-items: center;
 }
 
-.created-recruitments-header h2 {
-    font-size: 18px;
-    color: #1e293b;
-    padding: 0;
-    margin: 0;
-    font-weight: 600;
-}
+
 
 .created-recruitments-header .btn-create-new {
     background-color: #22c55e;
@@ -379,18 +379,17 @@ body {
 }
 
 .btn-view, .btn-edit, .btn-delete {
-    padding: 8px 12px;
+    padding: 6px 10px; /* Reduced padding */
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 0.8rem; /* Slightly smaller font */
     font-weight: 500;
     transition: all 0.2s ease;
-    min-width: 70px;
+    min-width: 65px; /* Reduced from 70px */
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 3px; /* Reduced from 5px */
 }
-
 
 /* Remove extra space between header and table */
 .created-recruitments-table-container > div {
