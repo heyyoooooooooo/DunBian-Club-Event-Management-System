@@ -338,6 +338,7 @@ $current_date = date('Y-m-d');
             <a href="dashboard.php">Home</a>
             <span>&gt;</span>
             <a href="events.php">Events</a>
+            
             <?php if ($view_registrations): ?>
                 <span>&gt;</span>
                 <span>Registrations for <?php echo htmlspecialchars($current_event_title); ?></span>

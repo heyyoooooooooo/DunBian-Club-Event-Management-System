@@ -1,28 +1,3 @@
-<?php
-// Include authentication and configuration files
-include('admin_auth.php'); // Ensure admin is authenticated
-include('config.php'); // Database connection
-
-// Check if a search term is submitted
-$search_term = isset($_POST['search']) ? $_POST['search'] : '';
-
-// Get active tab (default to 'timeslots')
-$active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'timeslots';
-
-// Get selected recruitment if any
-$selected_recruitment = isset($_GET['recruitment']) ? intval($_GET['recruitment']) : 0;
-
-// Fetch all recruitment events for the dropdown
-$recruitment_query = "SELECT recruit_id, recruit_title FROM recruitment ORDER BY recruit_title ASC";
-$recruitment_result = $conn->query($recruitment_query);
-$recruitment_options = [];
-if ($recruitment_result && $recruitment_result->num_rows > 0) {
-    while ($row = $recruitment_result->fetch_assoc()) {
-        $recruitment_options[] = $row;
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,22 +7,23 @@ if ($recruitment_result && $recruitment_result->num_rows > 0) {
     <link rel="stylesheet" href="/EVENT_MANAGEMENT/interview.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Additional CSS for new features */
+        /* Additional CSS for improved design */
         .tab-navigation {
             display: flex;
-            margin-bottom: 20px;
+            margin: 0 20px 20px;
             border-bottom: 1px solid #e2e8f0;
         }
         
         .tab-button {
-            padding: 12px 24px;
+            padding: 14px 28px;
             background: none;
             color: var(--secondary);
             border: none;
             border-bottom: 3px solid transparent;
             cursor: pointer;
             font-weight: 500;
-            margin-right: 10px;
+            margin-right: 15px;
+            transition: all 0.3s ease;
         }
         
         .tab-button.active {
@@ -55,68 +31,243 @@ if ($recruitment_result && $recruitment_result->num_rows > 0) {
             border-bottom: 3px solid var(--primary);
         }
         
+        .tab-button i {
+            margin-right: 10px;
+        }
+        
         .recruitment-filter {
-            margin-bottom: 20px;
-            width: 100%;
+            margin: 0 20px 25px;
+            width: calc(100% - 40px);
         }
         
         .recruitment-filter select {
-            padding: 10px 15px;
+            padding: 12px 18px;
             border-radius: 8px;
             border: 1px solid #e2e8f0;
             width: 100%;
             max-width: 350px;
             font-size: 14px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
         
-        /* Updated status indicators */
+        .recruitment-filter select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            outline: none;
+        }
+        
+        /* Status indicators */
         .status-full-row {
-            background-color: #fff5f5; /* Light red background */
+            background-color: #fff5f5;
         }
         
         .status-full {
-            color: #dc2626; /* Dark red text */
-            background-color: transparent;
+            color: #dc2626;
             font-weight: 600;
-            padding: 5px 0;
+            padding: 6px 12px;
+            background-color: rgba(220, 38, 38, 0.1);
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.85rem;
         }
         
         .status-available {
-            color: #16a34a; /* Dark green text */
-            background-color: transparent;
+            color: #16a34a;
             font-weight: 600;
-            padding: 5px 0;
+            padding: 6px 12px;
+            background-color: rgba(22, 163, 74, 0.1);
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.85rem;
         }
         
-        /* Title styling */
+        /* Page title styling */
         .page-title {
             margin: 30px 30px 20px;
             font-size: 1.8rem;
             color: var(--dark);
+            font-weight: 600;
         }
         
-        /* Adjust container padding */
+        /* Container styling */
         .interview-table-container {
-            padding-top: 1rem;
+            background: white;
+            border-radius: 12px;
+            padding: 25px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin: 0 30px 30px;
         }
         
-        .btn-action-disabled {
-            background-color: #ccc !important;
-            cursor: not-allowed !important;
-            opacity: 0.7;
+        /* Table header */
+        .interview-table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 20px 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
         }
         
-        .action-note {
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #fffbea;
-            border-left: 4px solid #facc15;
-            color: #854d0e;
+        .interview-table-header h3 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        /* Create button */
+        .btn-create-new {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-create-new:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+        }
+        
+        /* Search bar */
+        .search-bar-container {
+            margin: 0 20px 25px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 4px 6px 4px 16px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+        
+        .search-bar button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar button:hover {
+            background-color: #4338ca;
+        }
+        
+        /* Table styling */
+        .interview-applicants-table {
+            width: calc(100% - 40px);
+            margin: 0 20px;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .interview-applicants-table th {
+            background-color: #f8fafc;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--secondary);
+            border-bottom: 2px solid #e2e8f0;
+            white-space: nowrap;
+        }
+        
+        .interview-applicants-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: middle;
+        }
+        
+        .interview-applicants-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .interview-applicants-table tr:hover {
+            background-color: #f8fafc;
+        }
+        
+        /* Action buttons */
+        .btn-view, .btn-delete {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            min-width: 80px;
+        }
+        
+        .btn-view {
+            background-color: var(--primary);
+        }
+        
+        .btn-view:hover {
+            background-color: #4338ca;
+            transform: translateY(-1px);
+        }
+        
+        .btn-delete {
+            background-color: #f44336;
+        }
+        
+        .btn-delete:hover {
+            background-color: #e53935;
+            transform: translateY(-1px);
+        }
+        
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--secondary);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .interview-table-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .btn-create-new {
+                align-self: flex-start;
+            }
+            
+            .recruitment-filter select {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
+    <!-- Sidebar - Keeping original -->
     <div id="sidebar">
         <div class="brand">
             <i class="fas fa-calendar-alt"></i> Dunbian Club
@@ -132,7 +283,7 @@ if ($recruitment_result && $recruitment_result->num_rows > 0) {
 
     <!-- Main Content -->
     <div id="content">
-        <!-- Header -->
+        <!-- Header - Keeping original -->
         <div id="header">
             <div class="user-controls">
                 <div class="notifications">
@@ -197,14 +348,16 @@ if ($recruitment_result && $recruitment_result->num_rows > 0) {
                 <div class="tab-content">
                     <div class="interview-table-header">
                         <h3>Manage Timeslots</h3>
-                        <button class="btn-create-new" onclick="location.href='create_timeslots.php';">Create Timeslot</button>
+                        <button class="btn-create-new" onclick="location.href='create_timeslots.php';">
+                            <i class="fas fa-plus"></i> Create Timeslot
+                        </button>
                     </div>
 
                     <!-- Search Bar -->
                     <div class="search-bar-container">
                         <form method="POST" action="interview.php?tab=timeslots<?php echo $selected_recruitment ? '&recruitment=' . $selected_recruitment : ''; ?>" class="search-bar">
-                            <input type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search_term); ?>">
-                            <button type="submit">Search</button>
+                            <input type="text" name="search" placeholder="Search by recruitment title or date..." value="<?php echo htmlspecialchars($search_term); ?>">
+                            <button type="submit"><i class="fas fa-search"></i> Search</button>
                         </form>
                     </div>
 
@@ -226,7 +379,7 @@ if ($recruitment_result && $recruitment_result->num_rows > 0) {
                             <?php
                             // Query to fetch interview timeslot data
                             $sql = "SELECT it.timeslot_id, it.timeslot_date, it.start_time, it.end_time, it.max_participants, 
-                                           it.booked_count, it.status, r.recruit_title, r.recruit_id
+                                        it.booked_count, it.status, r.recruit_title, r.recruit_id
                                     FROM interview_times it
                                     INNER JOIN recruitment r ON it.recruit_id = r.recruit_id";
 
@@ -238,14 +391,14 @@ if ($recruitment_result && $recruitment_result->num_rows > 0) {
                                 if (!empty($search_term)) {
                                     $search_term = $conn->real_escape_string($search_term);
                                     $sql .= " AND (r.recruit_title LIKE '%$search_term%' 
-                                          OR it.timeslot_date LIKE '%$search_term%')";
+                                            OR it.timeslot_date LIKE '%$search_term%')";
                                 }
                             } else {
                                 // Only apply search if no recruitment filter
                                 if (!empty($search_term)) {
                                     $search_term = $conn->real_escape_string($search_term);
                                     $sql .= " WHERE r.recruit_title LIKE '%$search_term%' 
-                                          OR it.timeslot_date LIKE '%$search_term%'";
+                                            OR it.timeslot_date LIKE '%$search_term%'";
                                 }
                             }
 
@@ -257,7 +410,7 @@ if ($recruitment_result && $recruitment_result->num_rows > 0) {
 
                             // Display the results
                             if ($result === false) {
-                                echo "<tr><td colspan='8'>Error executing query: " . $conn->error . "</td></tr>";
+                                echo "<tr><td colspan='8' class='empty-state'>Error executing query: " . $conn->error . "</td></tr>";
                             } elseif ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
                                     // Determine if timeslot is full
@@ -265,24 +418,28 @@ if ($recruitment_result && $recruitment_result->num_rows > 0) {
                                     $status_class = $is_full ? 'status-full' : 'status-available';
                                     $row_class = $is_full ? 'status-full-row' : '';
                                     
-                                    // Remove restriction: Always enable actions
                                     $action_onclick = "if(confirm('Are you sure you want to delete this timeslot?')) location.href='delete_timeslot.php?timeslot_id=" . htmlspecialchars($row['timeslot_id']) . "'";
+                                    
+                                    // Format the date to a more readable format
+                                    $formatted_date = date('D, M j, Y', strtotime($row['timeslot_date']));
                                     
                                     echo "<tr class='" . $row_class . "'>
                                             <td>" . htmlspecialchars($row['recruit_title']) . "</td>
-                                            <td>" . htmlspecialchars($row['timeslot_date']) . "</td>
+                                            <td>" . htmlspecialchars($formatted_date) . "</td>
                                             <td>" . htmlspecialchars($row['start_time']) . "</td>
                                             <td>" . htmlspecialchars($row['end_time']) . "</td>
                                             <td>" . htmlspecialchars($row['max_participants']) . "</td>
                                             <td>" . htmlspecialchars($row['booked_count']) . "</td>
                                             <td><span class='" . $status_class . "'>" . htmlspecialchars($row['status']) . "</span></td>
                                             <td>
-                                                <button class='btn-delete' onclick=\"" . $action_onclick . "\">Delete</button>
+                                                <button class='btn-delete' onclick=\"" . $action_onclick . "\">
+                                                    <i class='fas fa-trash-alt'></i> Delete
+                                                </button>
                                             </td>
-                                          </tr>";
+                                        </tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='8'>No interview timeslots found.</td></tr>";
+                                echo "<tr><td colspan='8' class='empty-state'>No interview timeslots found.</td></tr>";
                             }
                             ?>
                         </tbody>
@@ -299,7 +456,7 @@ if ($recruitment_result && $recruitment_result->num_rows > 0) {
                     <div class="search-bar-container">
                         <form method="POST" action="interview.php?tab=applicants<?php echo $selected_recruitment ? '&recruitment=' . $selected_recruitment : ''; ?>" class="search-bar">
                             <input type="text" name="search" placeholder="Search applicant name or email..." value="<?php echo htmlspecialchars($search_term); ?>">
-                            <button type="submit">Search</button>
+                            <button type="submit"><i class="fas fa-search"></i> Search</button>
                         </form>
                     </div>
                     
@@ -358,7 +515,7 @@ if ($recruitment_result && $recruitment_result->num_rows > 0) {
                             // Prepare and execute the statement
                             $stmt = $conn->prepare($sql);
                             if ($stmt === false) {
-                                echo "<tr><td colspan='7'>Error preparing query: " . $conn->error . "</td></tr>";
+                                echo "<tr><td colspan='6' class='empty-state'>Error preparing query: " . $conn->error . "</td></tr>";
                             } else {
                                 if (!empty($params)) {
                                     $stmt->bind_param($types, ...$params);
@@ -368,20 +525,24 @@ if ($recruitment_result && $recruitment_result->num_rows > 0) {
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        // Remove restriction: Always enable actions
+                                        // Format the date if available
+                                        $formatted_date = $row['timeslot_date'] ? date('D, M j, Y', strtotime($row['timeslot_date'])) : 'Not Scheduled';
+                                        
                                         echo "<tr>
                                                 <td>" . htmlspecialchars($row['stu_name']) . "</td>
                                                 <td>" . htmlspecialchars($row['stu_email']) . "</td>
                                                 <td>" . htmlspecialchars($row['recruit_title']) . "</td>
-                                                <td>" . ($row['timeslot_date'] ? htmlspecialchars($row['timeslot_date']) : 'Not Scheduled') . "</td>
+                                                <td>" . htmlspecialchars($formatted_date) . "</td>
                                                 <td>" . ($row['start_time'] ? htmlspecialchars($row['start_time']) . " - " . htmlspecialchars($row['end_time']) : 'N/A') . "</td>
                                                 <td>
-                                                    <button class='btn-view' onclick=\"location.href='view_applications.php?id=" . htmlspecialchars($row['application_id']) . "'\">View</button>
+                                                    <button class='btn-view' onclick=\"location.href='view_applications.php?id=" . htmlspecialchars($row['application_id']) . "'\">
+                                                        <i class='fas fa-eye'></i> View
+                                                    </button>
                                                 </td>
-                                              </tr>";
+                                            </tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='7'>No applicants found with booked interviews.</td></tr>";
+                                    echo "<tr><td colspan='6' class='empty-state'>No applicants found with booked interviews.</td></tr>";
                                 }
                                 $stmt->close();
                             }
@@ -412,7 +573,3 @@ if ($recruitment_result && $recruitment_result->num_rows > 0) {
     </script>
 </body>
 </html>
-<?php
-// Close the database connection
-$conn->close();
-?>

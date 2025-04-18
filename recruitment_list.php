@@ -1,3 +1,4 @@
+
 <?php
 include('admin_auth.php');
 // Include the database connection file
@@ -121,112 +122,123 @@ if ($recruit_id) {
             </div>
         </div>
 
-  <div class="breadcrumb">
-    <a href="dashboard.php">Home</a>
-    <span>&gt;</span>
-    <a href="recruitment_list.php">Recruitments</a>
-  </div>
-
-  <!-- Tab Navigation -->
-  <div class="tab-navigation">
-    <button class="tab-button <?php echo $activeTab == 'recruitments' ? 'active' : ''; ?>" 
-            onclick="switchTab('recruitments')">
-      <i class="fas fa-clipboard-list"></i> Manage Recruitments
-    </button>
-    <button class="tab-button <?php echo $activeTab == 'applicants' ? 'active' : ''; ?>" 
-            onclick="switchTab('applicants')">
-      <i class="fas fa-users"></i> View Applicants
-    </button>
-  </div>
-
-  <!-- Updated Applicants Tab Content -->
-<div id="applicantsTab" class="tab-content <?php echo $activeTab == 'applicants' ? 'active' : ''; ?>">
-    <div class="applications-list">
-        <form method="POST" action="recruitment_list.php?tab=applicants">
-            <label for="recruitment">Select Recruitment:</label>
-            <select name="recruit_id" id="recruitment" onchange="this.form.submit()">
-                <option value="">-- Select Recruitment --</option>
-                <?php
-                if ($recruitments_result->num_rows > 0) {
-                    while ($row = $recruitments_result->fetch_assoc()) {
-                        $selected = ($recruit_id == $row['recruit_id']) ? 'selected' : '';
-                        echo "<option value='" . $row['recruit_id'] . "' $selected>" . htmlspecialchars($row['recruit_title']) . "</option>";
-                    }
-                }
-                ?>
-            </select>
-        </form>
-    </div>
-
-    <?php if ($recruit_id && $activeTab == 'applicants'): ?>
-    <div class="applications-list-table-container">
-        <div class="interview-table-header">
-            <h2>Recruitment Application List</h2>
+        <div class="breadcrumb">
+            <a href="dashboard.php">Home</a>
+            <span>&gt;</span>
+            <a href="recruitment_list.php">Recruitments</a>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Student Name</th>
-                    <th>Matric No</th>
-                    <th>First Choice</th>
-                    <th>Second Choice</th>
-                    <th>Time Selection</th>
-                    <th>Recruitment Title</th>
-                    <th>Recruitment Time</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if (isset($result) && $result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>
-                                <td>" . htmlspecialchars($row['stu_name']) . "</td>
-                                <td>" . htmlspecialchars($row['stu_matric']) . "</td>
-                                <td>" . htmlspecialchars($row['dept_choice_1']) . "</td>
-                                <td>" . htmlspecialchars($row['dept_choice_2']) . "</td>
-                                <td>" . htmlspecialchars($row['timeslot_date'] ?? 'N/A') . " " . htmlspecialchars($row['start_time'] ?? '') . "</td>
-                                <td>" . htmlspecialchars($row['recruit_title']) . "</td>
-                                <td>" . htmlspecialchars($row['recruit_time']) . "</td>
-                                <td>
-                                    <button class='btn-view' onclick=\"location.href='view_applications.php?id=" . $row['application_id'] . "'\">View</button>
-                                </td>
-                            </tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='8'>No applications found for this recruitment.</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
-    <?php elseif ($activeTab == 'applicants' && !$recruit_id): ?>
-    <div class="applications-list-table-container">
-        <div class="interview-table-header">
-            <h2>Recruitment Application List</h2>
+
+        <!-- Display status messages if any -->
+        <?php if (isset($_GET['status']) && $_GET['status'] == 'success'): ?>
+        <div class="message success">
+            <i class="fas fa-check-circle"></i>
+            Application has been <?php echo $_GET['action'] == 'approve' ? 'approved' : 'rejected'; ?> successfully.
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Student Name</th>
-                    <th>Matric No</th>
-                    <th>First Choice</th>
-                    <th>Second Choice</th>
-                    <th>Time Selection</th>
-                    <th>Recruitment Title</th>
-                    <th>Recruitment Time</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="8">Please select a recruitment to view applications.</td>
-                </tr>
-            </tbody>
-        </table>
+        <?php endif; ?>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-button <?php echo $activeTab == 'recruitments' ? 'active' : ''; ?>" 
+                    onclick="switchTab('recruitments')">
+                <i class="fas fa-clipboard-list"></i> Manage Recruitments
+            </button>
+            <button class="tab-button <?php echo $activeTab == 'applicants' ? 'active' : ''; ?>" 
+                    onclick="switchTab('applicants')">
+                <i class="fas fa-users"></i> View Applicants
+            </button>
+        </div>
+
+        <!-- Applicants Tab Content -->
+        <div id="applicantsTab" class="tab-content <?php echo $activeTab == 'applicants' ? 'active' : ''; ?>">
+            <div class="applications-list">
+                <form method="POST" action="recruitment_list.php?tab=applicants">
+                    <label for="recruitment">Select Recruitment:</label>
+                    <select name="recruit_id" id="recruitment" onchange="this.form.submit()">
+                        <option value="">-- Select Recruitment --</option>
+                        <?php
+                        if ($recruitments_result && $recruitments_result->num_rows > 0) {
+                            while ($row = $recruitments_result->fetch_assoc()) {
+                                $selected = ($recruit_id == $row['recruit_id']) ? 'selected' : '';
+                                echo "<option value='" . $row['recruit_id'] . "' $selected>" . htmlspecialchars($row['recruit_title']) . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                </form>
+            </div>
+
+            <?php if ($recruit_id && $activeTab == 'applicants'): ?>
+            <div class="applications-list-table-container">
+                <div class="interview-table-header">
+                    <h2>Recruitment Application List</h2>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Matric No</th>
+                                <th>First Choice</th>
+                                <th>Second Choice</th>
+                                <th>Interview Date</th>
+                                <th>Interview Time</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (isset($result) && $result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    // Determine status class
+                                    $statusClass = '';
+                                    $status = $row['application_status'] ?? 'Pending';
+                                    if ($status == 'Approve') {
+                                        $statusClass = 'status-approved';
+                                    } elseif ($status == 'Reject') {
+                                        $statusClass = 'status-rejected';
+                                    } else {
+                                        $statusClass = 'status-pending';
+                                    }
+                                    
+                                    echo "<tr>
+                                            <td>" . htmlspecialchars($row['stu_name']) . "</td>
+                                            <td>" . htmlspecialchars($row['stu_matric']) . "</td>
+                                            <td>" . htmlspecialchars($row['dept_choice_1']) . "</td>
+                                            <td>" . htmlspecialchars($row['dept_choice_2']) . "</td>
+                                            <td>" . htmlspecialchars($row['timeslot_date'] ?? 'Not Set') . "</td>
+                                            <td>" . htmlspecialchars($row['start_time'] ?? 'Not Set') . "</td>
+                                            <td><span class='status $statusClass'>" . htmlspecialchars($status) . "</span></td>
+                                            <td>
+                                                <div class='action-buttons'>
+                                                    <button class='btn btn-sm btn-primary' onclick=\"location.href='view_applications.php?id=" . $row['application_id'] . "'\">
+                                                        <i class='fas fa-eye'></i> View
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='8'>No applications found for this recruitment.</td></tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <?php elseif ($activeTab == 'applicants' && !$recruit_id): ?>
+            <div class="applications-list-table-container">
+                <div class="interview-table-header">
+                    <h2>Recruitment Application List</h2>
+                </div>
+                <div class="empty-state">
+                    <i class="fas fa-users"></i>
+                    <h3>No Recruitment Selected</h3>
+                    <p>Please select a recruitment from the dropdown above to view applications.</p>
+                </div>
+            </div>
+            <?php endif; ?>
     </div>
-    <?php endif; ?>
-</div>
 
 <!-- Updated Recruitments Tab Content -->
 <div id="recruitmentsTab" class="tab-content <?php echo $activeTab == 'recruitments' ? 'active' : ''; ?>">

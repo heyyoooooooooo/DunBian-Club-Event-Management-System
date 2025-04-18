@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 * {
     margin: 0;
@@ -9,196 +9,205 @@
 
 :root {
     --primary: #4f46e5;
+    --primary-hover: #4338ca;
     --secondary: #64748b;
     --light: #f8fafc;
     --dark: #1e293b;
     --success: #22c55e;
-    --warning: #facc15;
+    --success-hover: #16a34a;
+    --warning: #f59e0b;
+    --warning-hover: #d97706;
     --danger: #ef4444;
-    
+    --danger-hover: #dc2626;
+    --border: #e2e8f0;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
 }
 
 body {
     display: flex;
-    background-color: var(--light);
+    background-color: #f1f5f9;
     min-height: 100vh;
-    
+    font-size: 14px;
 }
 
+/* Sidebar Styles */
 #sidebar {
-    width: 260px;
+    width: 270px;
     background: var(--dark);
     color: white;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    
+    padding: 25px 20px;
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
-    height: 100vh; /* Full height */
-    overflow-y: auto; /* Enable scrolling if content exceeds */
-    transition: width 0.3s ease;
+    height: 100vh;
+    overflow-y: auto;
+    transition: var(--transition);
+    z-index: 1000;
 }
 
 #sidebar .brand {
     font-size: 24px;
     font-weight: 600;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     display: flex;
     align-items: center;
 }
 
 #sidebar .brand i {
-    margin-right: 10px;
+    margin-right: 12px;
+    font-size: 26px;
+    color: var(--primary);
 }
 
 #sidebar a {
     text-decoration: none;
-    color: white;
-    padding: 10px;
-    margin: 5px 0;
+    color: #cbd5e1;
+    padding: 12px 16px;
+    margin: 6px 0;
     display: flex;
     align-items: center;
     border-radius: 8px;
-    transition: background 0.3s;
+    transition: var(--transition);
+    font-weight: 500;
 }
 
-#sidebar a:hover, #sidebar a.active {
+#sidebar a:hover {
+    background: rgba(79, 70, 229, 0.1);
+    color: white;
+}
+
+#sidebar a.active {
     background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
 }
 
 #sidebar a i {
-    margin-right: 10px;
+    margin-right: 12px;
+    font-size: 18px;
 }
 
-.dropdown-icon {
-    margin-left: 40px; /* Adds spacing between text and icon */
-    color: white; /* Makes the icon white */
-    transition: transform 0.3s; /* Smooth transition for rotation */
-}
-
-.recruitment-link.active .dropdown-icon {
-    transform: rotate(180deg); /* Rotates icon when dropdown is open */
-}
-
- /* Dropdown styling */
-.dropdown-content {
-    display: none; /* Hidden by default */
-    background-color: #444;
-    position: absolute;
-    left: 20px;
-    z-index: 1000; /* Ensures it appears above other elements */
-    width: 200px;
-    padding: 10px 0;
-    border-radius: 5px;
-}
-
-.dropdown-content a {
-    padding: 10px 20px;
-    color: white;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #575757; /* Highlight on hover */
-}
-
-.dropdown-content.active {
-    display: block; /* Show dropdown when active */
-}
-
+/* Main Content Area */
 #content {
-    margin-left: 0px;
     flex: 1;
+    margin-left: 270px;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    overflow-y: auto;
-    padding: 0 15px; /* Add horizontal padding */
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
+/* Header Styles */
 #header {
     background: white;
     display: flex;
-    align-items: center; /* Align vertically */
-    justify-content: space-between; /* Push left and right sections apart */
-    padding: 15px 30px;
-    border-bottom: 1px solid #e2e8f0;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 16px 30px;
+    border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 900;
+    box-shadow: var(--shadow);
 }
 
 .user-controls {
     display: flex;
-    justify-content: flex-end; /* Ensure alignment to the right */
-    align-items: center; /* Center icons vertically */
-    gap: 20px; /* Space between icons */
-    margin-left: auto; /* Push to the far right */
+    align-items: center;
+    gap: 24px;
 }
 
 .user-controls .notifications {
     position: relative;
-    font-size: 24px;
+    font-size: 22px;
+    color: var(--secondary);
+    cursor: pointer;
+}
+
+.user-controls .notifications:hover {
+    color: var(--primary);
 }
 
 .user-controls .notifications .notification-count {
     position: absolute;
-    top: -5px;
-    right: -10px;
+    top: -8px;
+    right: -8px;
     background: var(--danger);
     color: white;
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: 600;
     padding: 2px 6px;
-    border-radius: 50%;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
 }
 
 .user-controls .account {
     position: relative;
-    font-size: 18px;
+    font-size: 22px;
     cursor: pointer;
+    color: var(--secondary);
+    padding: 8px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.user-controls .account:hover {
+    background: var(--light);
+    color: var(--primary);
 }
 
 .user-controls .account-menu {
-    display: none; /* Initially hidden */
+    display: none;
     position: absolute;
-    top: 40px;
+    top: 45px;
     right: 0;
     background: white;
-    border: 3px solid #e2e8f0;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 180px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
 }
 
 .user-controls .account-menu a {
     display: block;
-    padding: 10px 20px;
+    padding: 12px 20px;
     color: var(--dark);
     text-decoration: none;
-    transition: background 0.3s;
+    transition: var(--transition);
 }
 
 .user-controls .account-menu a:hover {
     background: var(--light);
+    color: var(--primary);
 }
 
+/* Breadcrumb Styles */
 .breadcrumb {
-    padding: 15px 30px;
+    padding: 18px 30px;
     background: white;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
 }
 
 .breadcrumb a {
     color: var(--primary);
     text-decoration: none;
-    margin-right: 5px;
+    margin-right: 8px;
+    font-weight: 500;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
 }
 
 .breadcrumb span {
-    margin-right: 5px;
+    margin-right: 8px;
     color: var(--secondary);
 }
 
@@ -207,22 +216,23 @@ body {
     display: flex;
     background: white;
     padding: 0 30px;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .tab-button {
-    padding: 15px 20px;
+    padding: 18px 24px;
     background: none;
     border: none;
     cursor: pointer;
     color: var(--secondary);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     border-bottom: 3px solid transparent;
-    transition: all 0.3s;
+    transition: var(--transition);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 
 .tab-button i {
@@ -231,7 +241,7 @@ body {
 
 .tab-button:hover {
     color: var(--primary);
-    background-color: #f8fafc;
+    background-color: rgba(79, 70, 229, 0.04);
 }
 
 .tab-button.active {
@@ -242,174 +252,49 @@ body {
 /* Tab Content Styles */
 .tab-content {
     display: none;
-    padding: 15px 0;
+    padding: 25px 30px;
 }
 
 .tab-content.active {
     display: block;
 }
 
-/* General table styling */
-.applications-list-table-container {
+/* Card Styles */
+.card {
     background: white;
-    border-radius: 10px;
-    padding: 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    margin: 20px 15px;
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 25px;
 }
 
-.interview-table-header {
-    background-color: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 15px 20px;
-}
-
-.interview-table-header h2,
-.created-recruitments-header h2 {
-    font-size: 1.8rem; /* Increase title font size to 1.8rem */
-    color: #1e293b;
-    padding: 0;
-    margin: 0;
-    font-weight: 600;
-}
-
-.applications-list-table-container table,
-.created-recruitments-table-container table {
-    table-layout: fixed; /* For more consistent column widths */
-    border-spacing: 0;
-    width: 100%;
-}
-
-.applications-list-table-container table th,
-.created-recruitments-table-container table th {
-    background-color: #f8fafc;
-    color: #64748b;
-    font-weight: 600;
-    padding: 15px 20px;
-    text-align: left;
-    border-bottom: 1px solid #e2e8f0;
-    font-size: 0.9rem; /* Adjust header font size */
-}
-
-.applications-list-table-container table td,
-.created-recruitments-table-container table td {
-    padding: 15px 20px;
-    border-bottom: 1px solid #f1f5f9;
-    color: #334155;
-    vertical-align: middle;
-    font-size: 0.9rem; /* Adjust content font size to 0.9rem */
-}
-
-.applications-list-table-container table tr:hover {
-    background-color: #f8fafc;
-}
-
-.applications-list-table-container .btn-view {
-    background-color: #4f46e5;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.applications-list-table-container .btn-view:hover {
-    background-color: #4338ca;
-    transform: translateY(-1px);
-}
-
-/* No Applications Message Styling */
-.applications-list-table-container tr td[colspan="8"] {
-    text-align: center;
-    padding: 40px 20px;
-    color: #64748b;
-    font-style: italic;
-}
-
-/* Recruitment Management Table Improvements */
-.created-recruitments-table-container {
-    background: white;
-    border-radius: 10px;
-    padding: 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    margin: 20px 15px;
-    overflow: hidden;
-}
-
-.created-recruitments-header {
-    background-color: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 15px 20px;
-    margin-bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-
-.created-recruitments-header .btn-create-new {
-    background-color: #22c55e;
-    color: white;
-    padding: 10px 18px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.created-recruitments-header .btn-create-new:hover {
-    background-color: #16a34a;
-    transform: translateY(-1px);
-}
-
-/* Action Buttons Styling */
-.action-buttons {
-    display: flex;
-    gap: 8px;
-}
-
-.btn-view, .btn-edit, .btn-delete {
-    padding: 6px 10px; /* Reduced padding */
-    border-radius: 6px;
-    font-size: 0.8rem; /* Slightly smaller font */
-    font-weight: 500;
-    transition: all 0.2s ease;
-    min-width: 65px; /* Reduced from 70px */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3px; /* Reduced from 5px */
-}
-
-/* Remove extra space between header and table */
-.created-recruitments-table-container > div {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-/* Style for the applications-list container */
-.applications-list {
-    margin: 20px 30px;
-    padding: 25px;
-    width: auto;
-    max-width: 100%;
+.card-header {
+    padding: 20px 25px;
     background-color: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--border);
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark);
+    margin: 0;
+}
+
+.card-body {
+    padding: 0;
+}
+
+/* Recruitment Filter */
+.applications-list {
+    margin: 0 0 25px 0;
+    padding: 20px 25px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
 }
 
 .applications-list form {
@@ -419,140 +304,442 @@ body {
     gap: 15px;
 }
 
-/* Label styling within applications-list */
 .applications-list label {
     font-weight: 600;
-    margin-bottom: 0;
-    font-size: 16px;
-    color: #1e293b;
+    font-size: 15px;
+    color: var(--dark);
     white-space: nowrap;
 }
 
 .applications-list select {
     flex: 1;
     padding: 12px 15px;
-    font-size: 15px;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    background-color: #f8fafc;
-    color: #1e293b;
+    font-size: 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--light);
+    color: var(--dark);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .applications-list select:hover {
     border-color: #cbd5e1;
-    background-color: #f1f5f9;
 }
 
-
-/* Focus effect for select box */
 .applications-list select:focus {
     outline: none;
-    border-color: #4f46e5;
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
-/* Optional: Disabled select box */
-.applications-list select:disabled {
-    background-color: #e9ecef; /* Light gray background when disabled */
-    cursor: not-allowed; /* Indicate disabled state */
+/* Table Styles */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
 }
 
-/*created-recruitment class in recruitment.php*/
-.created-recruitments {
-    padding: 20px 30px;
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
-/* Status Styles */
-.status-pending {
-    color: #ffc107; /* Bright yellow for visibility */
-    font-weight: bold;
+table th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
 }
 
-.status-approved {
-    color: #28a745; /* Green */
-    font-weight: bold;
+table td {
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--dark);
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
 }
 
-.status-rejected {
-    color: #dc3545; /* Red */
-    font-weight: bold;
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table tr:hover td {
+    background-color: rgba(79, 70, 229, 0.04);
 }
 
 /* Button Styles */
-button {
-    padding: 8px 15px;
-    border: none;/* Green */
-    color: white;
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: var(--transition);
     cursor: pointer;
-    border-radius: 5px;
-    margin: 0 5px;
-    font-size: 0.9rem; /* Slightly smaller for consistency */
+    border: none;
+    gap: 8px;
 }
 
-/* Optional: Adjust the styling for the button */
-.btn-create-new {
-    background-color:  #4CAF50; /* Green button color */
-    transition: background 0.3s;
-    font-size: 1rem; /* Increase font size for better visibility */
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 13px;
 }
 
-.btn-create-new:hover {
-    background-color: #218838; /* Darker green on hover */
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
 }
 
-button.btn-reject {
-    background-color: #f44336; /* Red */
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(79, 70, 229, 0.2);
 }
 
-button:hover {
-    opacity: 0.8;
+.btn-success {
+    background-color: var(--success);
+    color: white;
 }
 
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    color: #777; /* Subtle disabled text color */
+.btn-success:hover {
+    background-color: var(--success-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(34, 197, 94, 0.2);
+}
+
+.btn-warning {
+    background-color: var(--warning);
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: var(--warning-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(245, 158, 11, 0.2);
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(239, 68, 68, 0.2);
+}
+
+/* Status Styles */
+.status {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-pending {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+}
+
+.status-approved {
+    background-color: rgba(34, 197, 94, 0.1);
+    color: #16a34a;
+}
+
+.status-rejected {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+}
+
+/* Action Buttons Styling */
+.action-buttons {
+    display: flex;
+    gap: 8px;
 }
 
 .btn-view {
-    background-color:  #007bff; /* Blue for View */
+    background-color: var(--primary);
     color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
 .btn-view:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-hover);
 }
 
 .btn-edit {
-    background-color: #efb300; /* Orange for Edit */
+    background-color: var(--warning);
     color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
 .btn-edit:hover {
-    background-color:#f3bc18;
+    background-color: var(--warning-hover);
 }
 
 .btn-delete {
-    background-color: #f44336; /* Red for Delete */
+    background-color: var(--danger);
     color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
 .btn-delete:hover {
-    background-color: #e53935;
+    background-color: var(--danger-hover);
+}
+
+/* Message Styles */
+.message {
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+}
+
+.message.success {
+    background-color: rgba(34, 197, 94, 0.1);
+    color: #16a34a;
+    border-left: 4px solid var(--success);
+}
+
+.message.error {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+    border-left: 4px solid var(--danger);
+}
+
+.message i {
+    margin-right: 12px;
+    font-size: 18px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    #sidebar {
+        width: 240px;
+    }
+    
+    #content {
+        margin-left: 240px;
+    }
+}
+
+@media (max-width: 992px) {
+    #sidebar {
+        width: 200px;
+    }
+    
+    #content {
+        margin-left: 200px;
+    }
+    
+    .applications-list form {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .applications-list select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        transform: translateX(-100%);
+        z-index: 1001;
+    }
+    
+    body.sidebar-open #sidebar {
+        transform: translateX(0);
+    }
+    
+    #content {
+        margin-left: 0;
+    }
+    
+    #header {
+        padding: 12px 20px;
+    }
+    
+    .tab-navigation {
+        padding: 0 20px;
+    }
+    
+    .tab-button {
+        padding: 15px 12px;
+        font-size: 13px;
+    }
+    
+    .tab-content {
+        padding: 20px;
+    }
+    
+    .applications-list {
+        padding: 15px;
+    }
+    
+    table th, table td {
+        padding: 12px 15px;
+    }
+    
+    .menu-toggle {
+        display: block;
+        font-size: 22px;
+        cursor: pointer;
+        color: var(--dark);
+        margin-right: auto;
+    }
+}
+
+/* Empty State */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 48px;
+    color: #cbd5e1;
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-size: 18px;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    font-size: 14px;
+    color: var(--secondary);
+    margin-bottom: 20px;
+    max-width: 400px;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 5px;
+}
+
+.pagination a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    background: white;
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border: 1px solid var(--border);
+}
+
+.pagination a:hover {
+    background: var(--light);
+    color: var(--primary);
+}
+
+.pagination a.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Custom Additions */
+.created-recruitments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background-color: white;
+    border-bottom: 1px solid var(--border);
+}
+
+.created-recruitments-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark);
+    margin: 0;
+}
+
+.btn-create-new {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--success);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    border: none;
+}
+
+.btn-create-new:hover {
+    background-color: var(--success-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(34, 197, 94, 0.2);
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+/* Fix for application list table */
+.applications-list-table-container,
+.created-recruitments-table-container {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.interview-table-header {
+    padding: 20px 25px;
+    background-color: white;
+    border-bottom: 1px solid var(--border);
+}
+
+.interview-table-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark);
+    margin: 0;
+}
+
+/* Fix for empty results */
+td[colspan] {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--secondary);
+    font-style: italic;
 }
 
 /* Style for the form container */
@@ -696,6 +883,8 @@ textarea:focus {
     border-color: var(--primary);
     outline: none;
 }
+
+
 
 .message {
     width: 100%; /* Make the message box the same width as the table */
