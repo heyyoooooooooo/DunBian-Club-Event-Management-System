@@ -179,7 +179,7 @@ $conn->close();
         .metric .trend.down {
             color: var(--danger);
         }
-        /*
+        
         .metric.primary {
             border-left-color: var(--primary);
         }
@@ -203,7 +203,7 @@ $conn->close();
         .metric.teal {
             border-left-color: #009688;
         }
-        */
+        
         .overview-card {
             flex: 1;
             background: white;
